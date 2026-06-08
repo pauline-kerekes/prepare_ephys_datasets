@@ -1,5 +1,5 @@
 
-function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilosortVersion)
+function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilosortVersion, min_spikes)
 
     if use_waveforms == 'y'
        ephysRawFile = strcat(ephysKilosortPath,'\spikes_combi.bin') ; % cell selection will be based on waveforms
@@ -14,7 +14,7 @@ function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilo
         tic;
         ephysMetaDir = []; % for the concatenated file we don't have 
         % if you put [] for the ephysMetaDir then you have to make sure that the
-        % neurpixels version in qualityParamValue  (Neuropixels 2.0. or 1.0.)
+        % neuropixels version in qualityParamValue  (Neuropixels 2.0. or 1.0.)
         savePath = [ephysKilosortPath  filesep 'bombcell']; % where you want to save the quality metrics 
         gain_to_uV = NaN; % use this if you are not using spikeGLX or openEphys to record your data. this value, 
         % when mulitplied by your raw data should convert it to  microvolts. 
@@ -22,14 +22,13 @@ function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilo
         [spikeTimes_samples, spikeClusters, templateWaveforms, templateAmplitudes, pcFeatures, ...
          pcFeatureIdx, channelPositions] = bc.load.loadEphysData(ephysKilosortPath, savePath);
 
-        param = bc.qm.qualityParamValues(ephysMetaDir, ephysRawFile, ephysKilosortPath, gain_to_uV, kilosortVersion,neuropixelsVersion);
+        param = bc.qm.qualityParamValues(ephysMetaDir, ephysRawFile, ephysKilosortPath, gain_to_uV, kilosortVersion, neuropixelsVersion, min_spikes);
         
         % adding some parameters specific to neuropixels recordings
         param.nChannels = 385;
         param.nSyncChannels = 1;
         param.ephys_sample_rate = 30000; % default, 30000 samples / s. 
         nb_channels = 384; % acquisition channels only
-        min_spikes = 300;
         %
 
         [qMetric, unitType] = bc.qm.runAllQualityMetrics(param, spikeTimes_samples, spikeClusters, ...

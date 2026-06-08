@@ -1,4 +1,4 @@
-function param = qualityParamValues(ephysMetaDir, rawFile, ephysKilosortPath, gain_to_uV, kilosortVersion, neuropixelsVersion)
+function param = qualityParamValues(ephysMetaDir, rawFile, ephysKilosortPath, gain_to_uV, kilosortVersion, neuropixelsVersion, min_spikes)
 % JF, Load a parameter structure defining extraction and
 % classification parameters
 % ------
@@ -219,7 +219,7 @@ param.ssMin = NaN; % minimum silhouette score
 param.minAmplitude = 40; % in uV
 param.maxRPVviolations = 0.1; % fraction
 param.maxPercSpikesMissing = 20; % in percentage
-param.minNumSpikes = 300; % number of spikes
+param.minNumSpikes = min_spikes; %300; % number of spikes
 param.maxDrift = 100; % in micrometers 
 param.minPresenceRatio = 0.7; % fraction
 param.minSNR = 5;
