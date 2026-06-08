@@ -1,5 +1,5 @@
 
-
+%%
 ephysKilosortPath = 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'; % like: 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'
 use_waveforms = 'n';
 neuropixelsVersion = 2;
