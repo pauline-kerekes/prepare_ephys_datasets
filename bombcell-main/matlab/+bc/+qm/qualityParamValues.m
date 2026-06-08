@@ -1,4 +1,4 @@
-function param = qualityParamValues(ephysMetaDir, rawFile, ephysKilosortPath, gain_to_uV, kilosortVersion)
+function param = qualityParamValues(ephysMetaDir, rawFile, ephysKilosortPath, gain_to_uV, kilosortVersion, neuropixelsVersion)
 % JF, Load a parameter structure defining extraction and
 % classification parameters
 % ------
@@ -64,7 +64,8 @@ if strcmp(rawFile, "NaN")
 else
     param.extractRaw = 1; %whether to extract raw waveforms or not 
 end
-param.probeType = 1; % if you are using spikeGLX and your meta file does 
+% PK puts probeType to 2 (neuropixels 2.0.)
+param.probeType = neuropixelsVersion; % was 1; % if you are using spikeGLX and your meta file does 
     % not contain information about your probe type for some reason
     % specify it here: '1' for 1.0 (3Bs) and '2' for 2.0 (single or 4-shanks)
     % For additional probe types, make a pull request with more
@@ -82,7 +83,9 @@ param.tauR_values = 0.002; % Refractory period values to test (in seconds)
     % For sweeping, use e.g. 0.001:0.0005:0.005 to test 1-5ms
 param.tauC = 0.1/1000; % Censored period time (s) - ISIs below this are excluded
     % (prevents counting duplicate spike detections as violations)
-param.contaminationValues = []; % For ibl_sliding: contamination values to test
+% PK changes the following line because in the parquetwrite function we get
+% an error: Variable "contaminationValues" has attributes that are unsupported for writing to a Parquet file.
+param.contaminationValues = 0; % was []; % For ibl_sliding: contamination values to test
     % If empty, uses (0.5:0.5:35)/100 (0.5% to 35%)
 param.confidenceThreshold = 0.9; % For ibl_sliding: confidence threshold
 
@@ -188,9 +191,12 @@ param.somatic = 1; % keep only somatic units, and reject non-somatic ones
 param.minWvDuration = 100; % in us
 param.maxWvDuration = 1150; % in us
 param.minSpatialDecaySlope = -0.008; % in a.u./um
-param.minSpatialDecaySlopeExp = 0.01; % in a.u./um
-param.maxSpatialDecaySlopeExp = 0.1; % in a.u./um
-param.maxWvBaselineFraction = 0.3; % maximum absolute value in waveform baseline
+% PK (050626) adjusts this parameter to decrease the number of false negative
+param.minSpatialDecaySlopeExp = 0.004;% was 0.01; % in a.u./um
+% PK (050626) adjusts this parameter to decrease the number of false negative
+param.maxSpatialDecaySlopeExp = 0.3;% was : 0.1; % in a.u./um
+% PK (050626) adjusts this parameter to decrease the number of false negative
+param.maxWvBaselineFraction = 0.35;% was: 0.3; % maximum absolute value in waveform baseline
     % should not exceed this fraction of the waveform's abolute peak value
 param.maxScndPeakToTroughRatio_noise = 0.8; % peak must be less than this x the trough 
 

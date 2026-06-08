@@ -116,7 +116,17 @@ if isfield(param,'saveAsTSV') % ensure back-compatibility if users have a previo
     if param.saveAsTSV == 1 
         cluster_id_vector = qMetric.phy_clusterID; % from bombcell to phy nomenclature 
         if isfield(param,'ephysKilosortPath') && ~strcmp(param.ephysKilosortPath, 'NaN') && ~isempty(param.ephysKilosortPath)
-            saveTSV_path = param.ephysKilosortPath;
+            % PK changes the path to save the .tsv (for Phy) - I didn't
+            % want them to be in the kilosort folder because it gets a bit
+            % messy
+            
+            %saveTSV_path = param.ephysKilosortPath;
+            % added by PK:
+            saveTSV_path = strcat(param.ephysKilosortPath,'\tsv_for_Phy');
+            if ~exist(saveTSV_path)
+                mkdir(saveTSV_path);
+            end
+            %
         else
             saveTSV_path = savePath;
         end

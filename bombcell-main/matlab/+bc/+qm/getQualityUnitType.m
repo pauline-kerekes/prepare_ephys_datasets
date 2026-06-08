@@ -131,7 +131,13 @@ try
                 if param.saveAsTSV == 1
                     cluster_id_vector = qMetric.clusterID - 1; % from bombcell to phy nomenclature
                     if isfield(param, 'ephysKilosortPath')
-                        saveTSV_path = param.ephysKilosortPath;
+                        % PK changes the path below, so the kilosort folder
+                        % doesn't get too messy
+                        % saveTSV_path = param.ephysKilosortPath;
+                        saveTSV_path = strcat(param.ephysKilosortPath,'\tsv_for_Phy');
+                        if ~exist(saveTSV_path)
+                            mkdir(saveTSV_path);
+                        end
                     else
                         saveTSV_path = savePath;
                     end
