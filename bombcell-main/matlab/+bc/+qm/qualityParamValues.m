@@ -192,11 +192,11 @@ param.minWvDuration = 100; % in us
 param.maxWvDuration = 1150; % in us
 param.minSpatialDecaySlope = -0.008; % in a.u./um
 % PK (050626) adjusts this parameter to decrease the number of false negative
-param.minSpatialDecaySlopeExp = 0.004;% was 0.01; % in a.u./um
+param.minSpatialDecaySlopeExp = 0.01; %0.004;% was 0.01; % in a.u./um
 % PK (050626) adjusts this parameter to decrease the number of false negative
-param.maxSpatialDecaySlopeExp = 0.3;% was : 0.1; % in a.u./um
+param.maxSpatialDecaySlopeExp = 0.1;% 0.3;% was : 0.1; % in a.u./um
 % PK (050626) adjusts this parameter to decrease the number of false negative
-param.maxWvBaselineFraction = 0.35;% was: 0.3; % maximum absolute value in waveform baseline
+param.maxWvBaselineFraction = 0.3;% 0.35;% was: 0.3; % maximum absolute value in waveform baseline
     % should not exceed this fraction of the waveform's abolute peak value
 param.maxScndPeakToTroughRatio_noise = 0.8; % peak must be less than this x the trough 
 

@@ -17,8 +17,8 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
         mkdir(plotpath);
     end
 
-    npy_spike_clusters = readNPY(strcat(path_to_data,'spike_clusters.npy'));
-    npy_spike_times = readNPY(strcat(path_to_data,'spike_times.npy'));
+    npy_spike_clusters = readNPY(strcat(ephysKilosortPath,'\spike_clusters.npy'));
+    npy_spike_times = readNPY(strcat(ephysKilosortPath,'\spike_times.npy'));
 
     figure;
     iplott = 1;
@@ -49,7 +49,7 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
             a_poor_raw_waveform = zeros(length(spikes_for_wf),nb_channels,80); 
 
             % opening the file to extract the waveforms from
-            raw_file_with_all_the_data = fopen(strcat(path_to_data,'spikes_combi.bin'));
+            raw_file_with_all_the_data = fopen(strcat(ephysKilosortPath,'\spikes_combi.bin'));
             %raw_file_with_all_the_data = fopen(strcat(path_to_data,'merged.bin'));
 
 
@@ -95,7 +95,7 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
                 r = reshape(a_poor_raw_waveform(:,iwaveform,:),[size(a_poor_raw_waveform,1),80]);
                 mm = nanmean(r,1)+step*ii;
                 if iwaveform == best_channel
-                    plot(mm(15:60),'Color',colors(unitType(find(cluster_indices==cell_i))+1),'LineWidth',1.4);
+                    plot(mm(15:60),'Color','k','LineWidth',0.9);
     %             elseif ii == highest
     %                 plot(nanmean(r,1)+step*ii,'Color','k','LineWidth',1.1);
                 else

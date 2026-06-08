@@ -35,7 +35,7 @@ function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilo
                 templateWaveforms, templateAmplitudes, pcFeatures, pcFeatureIdx, channelPositions, savePath);
 
         % save the units classification and metrics
-        cd(strcat(toy_dataset_location,'\bombcell'));
+        cd(strcat(ephysKilosortPath,'\bombcell'));
         parquetwrite([fullfile(savePath, 'qmetrics_pk.parquet')], qMetric);
         save([fullfile(savePath, 'units_classification_pk.mat')], 'unitType');
         toc;
