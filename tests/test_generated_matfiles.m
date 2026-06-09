@@ -14,7 +14,7 @@ hold on;
 xlim([0,track_length]);
 
 
-load('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches\M102_11052026a_1596.mat');    
+load('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches_test\M102_11052026b_1596.mat');    
 
 spk_50 = ceil((spikes_stamps/spike_sampling_rate)*pos_sampling_rate);
 
