@@ -298,9 +298,12 @@ toc;
 
 %% compare properties
 % 725 (not good) and 726 (good)
+ephysKilosortPath = 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file';
+cd(strcat(ephysKilosortPath,'\bombcell'));
+qMetric = parquetread('qmetrics_pk.parquet');
 
-% cluster_indices = qMetric{:,["phy_clusterID"]};
-%qMetric(find(cluster_indices==725),:)
+cluster_indices = qMetric{:,["phy_clusterID"]};
+qMetric(find(cluster_indices==159),:)
 % qMetric(find(cluster_indices==1573),:)
 
 % decay_slope_values = qMetric{:,["spatialDecaySlope"]};

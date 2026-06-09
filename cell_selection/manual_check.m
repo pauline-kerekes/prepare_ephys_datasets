@@ -7,17 +7,16 @@ function manual_check(ephysKilosortPath)
     % load the data
     tic;
 %     toy_dataset_location = 'D:\mHYK20\180426\a_shankmix1_18042026_g0__b_shankmix1_18042026_g0'; 
-    cd(strcat(ephysKilosortPath,'\bombcell'));
-    qMetric = parquetread('qmetrics_pk.parquet');
-    cluster_indices = qMetric{:,["phy_clusterID"]};
-    best_channels_bombcell = qMetric{:,["maxChannels"]};
-    load('units_classification_pk.mat', 'unitType');
+%     cd(strcat(ephysKilosortPath,'\bombcell'));
+%     qMetric = parquetread('qmetrics_pk.parquet');
+%     cluster_indices = qMetric{:,["phy_clusterID"]};
+%     best_channels_bombcell = qMetric{:,["maxChannels"]};
+%     load('units_classification_pk.mat', 'unitType');
 
     load(strcat(ephysKilosortPath,'\waveforms_check\waveforms_for_manual_check.mat'),'array_waveforms_for_display','units_good_for_array','array_noise_for_display','units_noise_for_array');
 
-    cells_to_remove = [];
+    false_positives = [];
     all_cells = [];
-
 
     % Create the UI figure
     % Get the screen size
@@ -57,7 +56,7 @@ function manual_check(ephysKilosortPath)
                 
                 prompt = "to remove (in the form [1,2,4])";
                 value_field2 = input(prompt);
-                cells_to_remove = [cells_to_remove,value_field2];
+                false_positives = [false_positives,value_field2];
 
                 iplott=1;
                 close all;
@@ -69,12 +68,19 @@ function manual_check(ephysKilosortPath)
             break;
         end
     end
+    
+    prompt = "to remove (in the form [1,2,4])";
+    value_field2 = input(prompt);
+    false_positives = [false_positives,value_field2];
+    close all;
+    figure;
+    
     toc;
     
-    disp(strcat('N false positive = ',num2str(length(cells_to_remove)),'/',num2str(length(units_noise_for_array)+length(units_good_for_array))));
+    disp(strcat('N false positive = ',num2str(length(false_positives)),'/',num2str(length(units_noise_for_array)+length(units_good_for_array))));
     
     new_cells = all_cells;
-    for iii = cells_to_remove
+    for iii = false_positives
         new_cells(new_cells==iii) = [];
     end
     
@@ -123,7 +129,6 @@ function manual_check(ephysKilosortPath)
                 value_field2 = input(prompt);
                 false_negatives = [false_negatives,value_field2];
 
-
                 iplott=1;
                 close all;
                 figure;
@@ -134,12 +139,50 @@ function manual_check(ephysKilosortPath)
             break;
         end
     end
+    prompt = "which cells should be added? (put a list of numbers in the form [1,2,4] or [] if none should be removed)";
+    value_field2 = input(prompt);
+    false_negatives = [false_negatives,value_field2];
+    close all;
+    figure;
+    
     toc;
 
     new_cells = [new_cells,false_negatives];
 
     disp(strcat('N false negative = ',num2str(length(false_negatives)),'/',num2str(length(units_noise_for_array)+length(units_good_for_array))));
 
+    
+    % store the cells in a cell_list_kilo2 excel file
+    
+    cd(strcat(ephysKilosortPath,'\bombcell'));
+    qMetric = parquetread('qmetrics_pk.parquet');
+    cluster_indices = qMetric{:,["phy_clusterID"]};
+    best_channels_bombcell = qMetric{:,["maxChannels"]};
+    load('units_classification_pk.mat', 'unitType');
+
+    manual_curation_empty = [];
+    for cluster_i = new_cells
+         manual_curation_empty = [manual_curation_empty,string('0m')];
+    end
+    
+%     best_channels = best_channels_bombcell(ismember(cluster_indices,new_cells));
+    
+    % 
+    disp('saving the cells to keep for the analysis');
+    mkdir(strcat(ephysKilosortPath,'\manual_firstpart\'));
+    cd(strcat(ephysKilosortPath,'\manual_firstpart\'));
+    cell_list1 = 'cell_list_kilo2.xlsx';
+    
+    writematrix(string('before manual'),cell_list1,'Sheet',1,'Range',char(strcat('A1')));
+    writematrix(string('after manual'),cell_list1,'Sheet',1,'Range',char(strcat('E1')));
+
+    range_descr=strcat('A',num2str(icluster),':','A',num2str(icluster+length(clusters_to_store_in_excel)));
+    writematrix(new_cells',cell_list1,'Sheet',1,'Range',char(range_descr));
+
+    range_descr=strcat('E',num2str(icluster),':','E',num2str(icluster+length(clusters_to_store_in_excel)));
+    writematrix(manual_curation_empty',cell_list1,'Sheet',1,'Range',char(range_descr));
+
+    %writematrix([new_cells',manual_curation_empty'],filename);
     
 end
 
