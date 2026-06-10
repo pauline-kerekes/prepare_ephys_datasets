@@ -45,12 +45,20 @@ function manual_check(ephysKilosortPath)
                 for iwaveform = 1:size(array_wf,1)
                     plot(array_wf(iwaveform,:),'Color',[rand,rand,rand],'LineWidth',0.8);
                     hold on;
-                    yticks([]);
-                    xticks([]);
-                    title(num2str(units_good_for_array(1,cell_i)));
+%                     yticks([]);
+%                     xticks([]);
+%                     title(num2str(units_good_for_array(1,cell_i)));
                 end
                 iplott=iplott+1;
                 all_cells = [all_cells,units_good_for_array(1,cell_i)];
+                xticks([18,30,42,54]-15);
+                xticklabels({'-0.4','0','0.4','0.8'});                    
+                title(num2str(units_noise_for_array(1,cell_i)));
+    
+                    if iwaveform==1
+                        xlabel('ms');
+                        ylabel('microV');
+                    end
 
 
                 if iplott > 28
@@ -116,9 +124,15 @@ function manual_check(ephysKilosortPath)
                 for iwaveform = 1:size(array_wf,1)
                     plot(array_wf(iwaveform,:),'Color',[rand,rand,rand],'LineWidth',0.8);
                     hold on;
-                    yticks([]);
-                    xticks([]);
-                    title(num2str(units_noise_for_array(1,cell_i)));
+%                     yticks([]);
+%                     xticks([]);
+                xticks([18,30,42,54]-15);
+                xticklabels({'-0.4','0','0.4','0.8'});                    
+                title(num2str(units_noise_for_array(1,cell_i)));
+                    if iwaveform==1
+                        xlabel('ms');
+                        ylabel('microV');
+                    end
                 end
                 iplott=iplott+1;
                 all_cells = [all_cells,units_noise_for_array(1,cell_i)];
