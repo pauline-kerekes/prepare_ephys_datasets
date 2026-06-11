@@ -10,7 +10,7 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
     %
 
 %     colors = ['r','g','g','k'];
-%     types_kept = [];
+    types_kept = [];
 
     plotpath = strcat(ephysKilosortPath,'\waveforms_check\');% 'D:\a_shank0_10032026_g0\waveforms_check\';
     if ~exist(plotpath)
@@ -24,21 +24,18 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
 %     iplott = 1;
 %     ipdf = 1;
     array_waveforms_for_display = cell(1,length(find(unitType==1 | unitType==2)));
-    array_noise_for_display = cell(1,length(find(unitType==0 | unitType==3)));
+    array_noise_for_display = cell(1,length(find(unitType==0)));
     units_good_for_array = [];
     units_noise_for_array = [];
 
 
-    disp('storing waveforms...');
     for cell_i = cluster_indices' % 1:max(npy_spike_clusters)%1:1593 %cluster_list_after_manual_cutting
 
-        disp(strcat(num2str(find(cluster_indices'==cell_i)),'/',num2str(length(cluster_indices'))));
-        
 %         plot_go = 'y';
 
         spk_stamps_notaligned_inconcat = npy_spike_times(npy_spike_clusters==cell_i); 
 
-        if length(spk_stamps_notaligned_inconcat) >= min_spikes % if enough spikes, proceed to extract the waveforms from the raw data and store them   && unitType(find(cluster_indices==cell_i))~=3
+        if length(spk_stamps_notaligned_inconcat) >= min_spikes %&& unitType(find(cluster_indices==cell_i))~=3
             spikes_for_wf = randperm(length(spk_stamps_notaligned_inconcat),200);
 
 %         else % less than min_spikes spikes, do not take for the analysis
@@ -80,12 +77,12 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
             range=range+((recording_group-1)*48);
 
             % in that range, find the smallest waveform
-%             amps = [];
-%             for iwaveform = sort(range)
-%                 r = reshape(a_poor_raw_waveform(:,iwaveform,:),[size(a_poor_raw_waveform,1),80]);
-%                 amps = [amps,abs(max(r)-min(r))];
-% 
-%             end
+            amps = [];
+            for iwaveform = sort(range)
+                r = reshape(a_poor_raw_waveform(:,iwaveform,:),[size(a_poor_raw_waveform,1),80]);
+                amps = [amps,abs(max(r)-min(r))];
+
+            end
 %             lowest = find(amps==min(amps));
 %             lowest=lowest(1);
 %             highest = find(amps==max(amps));
@@ -115,17 +112,17 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
             end
 
             % store the waveforms to plot quicker for the manual check
-            if unitType(find(cluster_indices==cell_i)) == 1 || unitType(find(cluster_indices==cell_i)) == 2 % if this unit was classified as a MUA or single unit
+            if unitType(find(cluster_indices==cell_i)) == 1 || unitType(find(cluster_indices==cell_i)) == 2 % if this unit was clas
                 units_good_for_array = [units_good_for_array,cell_i];
                 array_waveforms_for_display{1,length(units_good_for_array)} = array_temp;
-            elseif unitType(find(cluster_indices==cell_i)) == 0 || unitType(find(cluster_indices==cell_i)) == 3 % if this unit was classified as noise or axonal unit
+            elseif unitType(find(cluster_indices==cell_i)) == 0 || unitType(find(cluster_indices==cell_i)) == 3
                 units_noise_for_array = [units_noise_for_array,cell_i];
                 array_noise_for_display{1,length(units_noise_for_array)} = array_temp;
             end
 
-%             iplott=iplott+1;
+            iplott=iplott+1;
 
-%             types_kept = [types_kept,unitType(find(cluster_indices==cell_i))];
+            types_kept = [types_kept,unitType(find(cluster_indices==cell_i))];
 
 %             if iplott > 30
 % 

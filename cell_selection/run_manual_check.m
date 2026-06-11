@@ -1,8 +1,10 @@
 
 
-ephysKilosortPath = 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'; % like: 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'
-manual_check(ephysKilosortPath);
-
+%%
+for pathdata = [string('150326'),string('160326'),string('170326'),string('180326')]
+    ephysKilosortPath = char(strcat('W:\mEC_tau_ephys\mHYK20\',pathdata,'\concatenated_file')); %ephysKilosortPath = 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'; % like: 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'
+    manual_check(ephysKilosortPath);
+end
 
 
 

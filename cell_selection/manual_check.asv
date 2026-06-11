@@ -162,7 +162,7 @@ function manual_check(ephysKilosortPath)
 
         toc;
 
-        % add the false negative units
+        % add the false negative
         new_cells = [new_cells,false_negatives];
 
         disp(strcat('N false negative = ',num2str(length(false_negatives)),'/',num2str(length(units_noise_for_array)+length(units_good_for_array))));
@@ -197,11 +197,6 @@ function manual_check(ephysKilosortPath)
 
         range_descr=strcat('E',num2str(2),':','E',num2str(2+length(new_cells)));
         writematrix(manual_curation_empty',cell_list1,'Sheet',1,'Range',char(range_descr));
-        
-        % save the n false negative, n false positive and total n cells (not
-        % counting axonal classified)
-        save('performance_classification.mat','false_negatives','false_positives','units_noise_for_array','units_good_for_array');
-        
 
         %writematrix([new_cells',manual_curation_empty'],filename);
     else
