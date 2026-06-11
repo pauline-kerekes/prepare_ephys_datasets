@@ -39,7 +39,7 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
         spk_stamps_notaligned_inconcat = npy_spike_times(npy_spike_clusters==cell_i); 
 
         if length(spk_stamps_notaligned_inconcat) >= min_spikes % if enough spikes, proceed to extract the waveforms from the raw data and store them   && unitType(find(cluster_indices==cell_i))~=3
-            spikes_for_wf = randperm(length(spk_stamps_notaligned_inconcat),200);
+            spikes_for_wf = randperm(length(spk_stamps_notaligned_inconcat)-10,200);
 
 %         else % less than min_spikes spikes, do not take for the analysis
 %             plot_go = 'n';

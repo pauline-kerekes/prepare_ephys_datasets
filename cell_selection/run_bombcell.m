@@ -8,7 +8,7 @@ function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilo
     end
     
     % W:\mEC_tau_ephys\mHYK20\200326\concatenated_file\manual_firstpart
-    if ~exist(strcat(ephysKilosortPath,'\concatenated_file\manual_firstpart\cell_list_kilo2'))
+    if ~exist(strcat(ephysKilosortPath,'\manual_firstpart\cell_list_kilo2.xlsx'),'file')
         
         %% run bombcell 
         tic;

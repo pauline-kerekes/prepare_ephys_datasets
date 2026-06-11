@@ -3,7 +3,7 @@
 
 function manual_check(ephysKilosortPath)
 
-    if ~exist(strcat(ephysKilosortPath,'\concatenated_file\manual_firstpart\cell_list_kilo2'))
+    if ~exist(strcat(ephysKilosortPath,'\manual_firstpart\cell_list_kilo2.xlsx'),'file') && exist(strcat(ephysKilosortPath,'\waveforms_check\waveforms_for_manual_check.mat'),'file') > 0
         %% experimentalist manual check of the false positive 
         % load the data
         tic;
