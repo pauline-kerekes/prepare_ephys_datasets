@@ -6,7 +6,7 @@
 + classify cells according to their spatial activity in a 2D real enclosure (applicable for hippocampus and entorhinal cortex recordings) .
 
 ## Stage 1: sorting the cells (Kilosort) and plot of the spikes rate maps.
-## Selection of the good units (Bombcell)
+## Stage 2: automatical selection of the good units (Bombcell)
 
 
 
