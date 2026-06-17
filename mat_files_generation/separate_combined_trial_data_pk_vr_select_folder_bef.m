@@ -200,8 +200,8 @@ function t = separate_combined_trial_data_pk_vr_select_folder_bef(M, part)
             %% PK change 130923
             % here I add an option if the pos is from VR
             if contains(string(pos_filename),string('__'))==1
-                disp(strcat('trial',num2str(ii)));
-                disp('thats VE');
+%                 disp(strcat('trial',num2str(ii)));
+%                 disp('thats VE');
                 session=string('mmmnn'); % not used in the function just put whatever string
                 [vector_pos_x, vector_time, vector_sync, vector_vertical_pos, vector_feeder, vector_rewards] = getting_pos_VR1D_v3(pos_filename,trial_folder,session);
                 
@@ -223,8 +223,8 @@ function t = separate_combined_trial_data_pk_vr_select_folder_bef(M, part)
               
             else % then it's RE
                 
-                disp(strcat('trial',num2str(ii)));
-                disp('thats RE');
+%                 disp(strcat('trial',num2str(ii)));
+%                 disp('thats RE');
                 
                 [xys_tmp, postim, trig] = clean_positions(posfile);
                 % Get position and angles

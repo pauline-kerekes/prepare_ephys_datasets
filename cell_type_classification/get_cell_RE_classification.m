@@ -1,4 +1,4 @@
-function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map] = get_cell_RE_classification(xy,dir_head,spikes_stamps,spike_sampling_rate,pos_sampling_rate,target_brain_region,pixels_per_m,m_per_bin)
+function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low_FR,ratio_max_min_FR] = get_cell_RE_classification(xy,dir_head,spikes_stamps,spike_sampling_rate,pos_sampling_rate,target_brain_region,pixels_per_m,m_per_bin)
 
         % this program to get the BC, GC, SI and HD scores is a copy of the program
         % 'batch_cell_function_v3_TV_updated' which was used during the
@@ -90,11 +90,11 @@ function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map] = get_cell
             best_scales=[best_scales,(nanmean(d)*2)];
 
         end
-        disp('best radius')
-        disp(best_radius(find(best_scores==max(max(best_scores)))));
-        disp('best scale')
-        disp(best_scales(find(best_scores==max(max(best_scores)))));
-
+%         disp('best radius')
+%         disp(best_radius(find(best_scores==max(max(best_scores)))));
+%         disp('best scale')
+%         disp(best_scales(find(best_scores==max(max(best_scores)))));
+% 
         GC_score = max(max(best_scores));
 
         %**************Estimating BC_measure:***********************************
@@ -116,6 +116,12 @@ function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map] = get_cell
         clear aaa bbb;
         
         
+        % get other criteria for classifying a cell firing as spatial
+        srm = ones(size(smooth_r_map));
+        surface_low_FR = sum(smooth_r_map<0.2*(max(max(smooth_r_map))-min(min(smooth_r_map))),'all')/sum(srm,'all');
+        ratio_max_min_FR = (max(max(smooth_r_map))/min(min(smooth_r_map)));
+
+        
         %% Assigning a cell type category based on the scores
         %the following part is added by PK on 240522 to get the cell type
         %from the scores, based on the thresholds used by JK and TV for
@@ -126,9 +132,22 @@ function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map] = get_cell
 %         BC >= 2.0
 %         HD >= 0.19
 %         SC /PC >= 1.3
-        
-        [cell_type] = get_cell_type_from_scores(GC_score,BC_score,SI_score,HD_score,target_brain_region);
-            
+        duration_in_minutes = (max(size(xy))/pos_sampling_rate)/60;
+        if length(spikes_stamps)/duration_in_minutes >= 10
+            [cell_type] = get_cell_type_from_scores(GC_score,BC_score,SI_score,HD_score,target_brain_region);
+
+            if cell_type == string('unclassified') || cell_type == string('HD')
+                if surface_low_FR >= 0.4 && ratio_max_min_FR >= 20
+                    cell_type = string('SC');
+                end
+            elseif cell_type == string('SC')
+                if surface_low_FR<0.4 && ratio_max_min_FR<20
+                    cell_type = string('unclassified');
+                end
+            end
+        else
+            cell_type = string('unclassified');
+        end
     
     
     

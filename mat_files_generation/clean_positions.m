@@ -3,7 +3,7 @@ m = memmapfile(posfile, 'Format', {'single',  [1 1] 'time'; 'single' [6 1]  'xy'
 a=m.Data;
 xys=[a.xy]';
 %
-disp(size(xys));
+% disp(size(xys));
 %
 postim=[a.time]';
 trig = [a.trigger]';

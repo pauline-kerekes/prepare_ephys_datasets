@@ -101,7 +101,6 @@ function [pos, dir_head, list_clusters, list_clusters_spikes] = get_spikes_pos_f
     list_clusters_spikes = cell(1,length(indeks));
     list_clusters = [];
     for i = 1:length(indeks)
-        disp(i);
         tic;
         cell_i = indeks(i);
         indz = sptime(klusters==cell_i); 
