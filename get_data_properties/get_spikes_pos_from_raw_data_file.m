@@ -1,6 +1,6 @@
 
 
-function [pos, list_clusters, list_clusters_spikes] = get_spikes_pos_from_raw_data_file(animal_folder_,recording_type,TTL_type,spike_sampling_rate,pos_sampling_rate)
+function [pos, dir_head, list_clusters, list_clusters_spikes] = get_spikes_pos_from_raw_data_file(animal_folder_,recording_type,TTL_type,spike_sampling_rate,pos_sampling_rate)
 
 
 %     [folder_names,pos_files,list_letter_recording,RE_recording_number] = get_folder_names_feb26(animal_folder_, VE_recording_number);
@@ -72,7 +72,7 @@ function [pos, list_clusters, list_clusters_spikes] = get_spikes_pos_from_raw_da
 
     sptime              =   t{n_trial}.spike_times; 
     pos                 =   t{n_trial}.xy1;
-%             dir_head              =   t{n_trial}.angles;
+    dir_head              =   t{n_trial}.angles;
 %             pos_z  = t{n_trial}.zpos;
 %             pos_y  = t{n_trial}.ypos;
 % 
