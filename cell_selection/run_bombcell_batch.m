@@ -26,8 +26,9 @@ for mouse = [string('MH502')]
         neuropixelsVersion = 2;
         kilosortVersion = 2;
         min_spikes = 300;
+        step = 10; % how close are the waveforms displayed (will be used for the manual check stage)
 
-        run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilosortVersion, min_spikes);
+        run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilosortVersion, min_spikes, step);
 
     end
     

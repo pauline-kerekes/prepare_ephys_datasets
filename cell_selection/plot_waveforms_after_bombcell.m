@@ -1,5 +1,5 @@
 
-function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spikes)
+function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spikes, step)
 
     % load the data
     cd(strcat(ephysKilosortPath,'\bombcell'));
@@ -91,7 +91,7 @@ function plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spike
 %             highest = find(amps==max(amps));
 %             highest=highest(1);
 
-            step = 20; %max(amps)/8;
+            %step = 20; %max(amps)/8;
             ii=1;
             array_temp = [];
             for iwaveform = sort(range)

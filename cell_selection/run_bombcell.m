@@ -1,5 +1,5 @@
 
-function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilosortVersion, min_spikes)
+function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilosortVersion, min_spikes, step)
 
     if use_waveforms == 'y'
        ephysRawFile = strcat(ephysKilosortPath,'\spikes_combi.bin') ; % cell selection will be based on waveforms
@@ -42,7 +42,7 @@ function run_bombcell(ephysKilosortPath, use_waveforms, neuropixelsVersion, kilo
 
         %% plot the waveforms classified as 'good' (in green),  'axonal' (black) or 'noise' (red)
         tic;
-        plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spikes);
+        plot_waveforms_after_bombcell(ephysKilosortPath, nb_channels, min_spikes, step);
         toc;
 
  
