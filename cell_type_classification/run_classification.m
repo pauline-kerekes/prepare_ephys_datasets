@@ -25,6 +25,9 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin)
         cell_types = [];
         %scores = NaN(7,length(list_clusters));
         clusters = [];
+        surfaces_low_FR = [];
+        ratios_max_min_FR = [];
+
         figure;
         iplot=1;
         ipdf=1;
@@ -39,10 +42,13 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin)
             clusters = [clusters;list_clusters(1,cell_i)];
             rate_maps{1,cell_i} = smooth_r_map;
             
+            surfaces_low_FR = [surfaces_low_FR;surface_low_FR];
+            ratios_max_min_FR = [ratios_max_min_FR;ratio_max_min_FR];
+            
             subplot(5,5,iplot);
             Draw_RMap(smooth_r_map);
             axis off;
-            title(strcat(num2str(surface_low_FR),{' '},num2str(round(ratio_max_min_FR,2)),{' '},cell_type));
+            title(strcat(num2str(list_clusters(1,cell_i)),{' '},cell_type));
             
             iplot=iplot+1;
             
@@ -68,7 +74,7 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin)
         print(strcat(concatenated_folder,'\cell_type_classification\rate_maps_before_check\',num2str(ipdf)),'-dpdf');
         close all;
         
-        scores = table(clusters,BC_scores,GC_scores,HD_scores,SI_scores,cell_types);
+        scores = table(clusters,BC_scores,GC_scores,HD_scores,SI_scores,cell_types,surfaces_low_FR,ratios_max_min_FR);
         
         % store the spikes, pos, rate maps, scores and cell types
         cd(strcat(concatenated_folder,'\cell_type_classification\'));
