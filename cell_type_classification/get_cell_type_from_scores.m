@@ -17,13 +17,11 @@ function [cell_type] = get_cell_type_from_scores(GC_score,BC_score,SI_score,HD_s
             if BC_score >= 2
                 cell_type = string('BC');
             else
-                if HD_score >= 0.19 %SI_score >= 1.3
-                    cell_type = string('HD');
+                if SI_score >= 1.3 %HD_score >= 0.19 %SI_score >= 1.3
+                    cell_type = string('SC');
 
-                else
-                    if SI_score >= 1.3
-                        cell_type = string('SC');
-                    end
+                elseif SI_score < 1.3 && HD_score >= 0.19
+                    cell_type = string('HD');
                 end
             end
 
