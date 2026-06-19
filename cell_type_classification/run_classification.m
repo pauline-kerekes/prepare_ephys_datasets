@@ -27,11 +27,11 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
         clusters = [];
         surfaces_low_FR = [];
         ratios_max_min_FR = [];
-
+        GC_scales = [];
         
         for cell_i = 1:length(list_clusters)
             spikes_stamps = [list_clusters_spikes{1,cell_i}];
-            [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low_FR,ratio_max_min_FR] = get_cell_RE_classification(pos,dir_head,spikes_stamps,spike_sampling_rate,pos_sampling_rate,target_brain_region,pixels_per_meter,m_per_bin);
+            [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low_FR,ratio_max_min_FR,GC_scale] = get_cell_RE_classification(pos,dir_head,spikes_stamps,spike_sampling_rate,pos_sampling_rate,target_brain_region,pixels_per_meter,m_per_bin);
             BC_scores = [BC_scores;BC_score];
             GC_scores = [GC_scores;GC_score];
             HD_scores = [HD_scores;HD_score];
@@ -42,6 +42,7 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
             
             surfaces_low_FR = [surfaces_low_FR;surface_low_FR];
             ratios_max_min_FR = [ratios_max_min_FR;ratio_max_min_FR];
+%             GC_scales = [GC_scales;GC_scale];
         end
         
         scores = table(clusters,BC_scores,GC_scores,HD_scores,SI_scores,cell_types,surfaces_low_FR,ratios_max_min_FR);
@@ -50,6 +51,7 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
         cd(strcat(concatenated_folder,'\cell_type_classification\'));
         save('classification_scores.mat','rate_maps','list_clusters','list_clusters_spikes','scores');
         
+        disp('classification finished');
         %% plot the results of the automatical cell type classification
         for celltype_target = [string('GC'),string('BC'),string('SC'),string('unclassified')]
             figure;
@@ -60,7 +62,8 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
                 Draw_RMap([rate_maps{1,list_clusters==cell_i}]);
                 axis off;
                 title(strcat(num2str(cell_i),{' '},cell_types(list_clusters==cell_i)));
-
+                %title(strcat(num2str(round(surfaces_low_FR(list_clusters==cell_i),2)),{' '},num2str(round(ratios_max_min_FR(list_clusters==cell_i),2))));
+                %title(strcat(num2str(GC_scores(list_clusters==cell_i))));
                 iplot=iplot+1;
 
                 if iplot > 25

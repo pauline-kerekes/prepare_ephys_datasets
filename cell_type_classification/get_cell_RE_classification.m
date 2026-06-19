@@ -1,4 +1,4 @@
-function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low_FR,ratio_max_min_FR] = get_cell_RE_classification(xy,dir_head,spikes_stamps,spike_sampling_rate,pos_sampling_rate,target_brain_region,pixels_per_m,m_per_bin)
+function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low_FR,ratio_max_min_FR,d] = get_cell_RE_classification(xy,dir_head,spikes_stamps,spike_sampling_rate,pos_sampling_rate,target_brain_region,pixels_per_m,m_per_bin)
 
         % this program to get the BC, GC, SI and HD scores is a copy of the program
         % 'batch_cell_function_v3_TV_updated' which was used during the
@@ -73,29 +73,30 @@ function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low
         smooth_r_map=smooth_r_map(ceil(miny/bin_size):ceil(maxy/bin_size), ceil(minx/bin_size):ceil(maxx/bin_size));
     
         %*************Estimating GC_measure:************************************
-        sacSmooth=get_smooth_SAC(SpRmap); %Obtains already smoothened SAC    
-        best_radius=[];
-        best_scores=[];
-        best_scales=[];
-        for corrected_rad=10:60
-            [GC_score, GC_orientations, d, field_diameter,correct_rad,calculated_rad]=get_Moser_GC_basic_props3_pauline(sacSmooth, GC_thresh,corrected_rad);
-%             disp(d);
-%             disp('*****');
-%             disp(corrected_rad);
-%             disp(GC_score);
-%             disp(strcat('scale=',num2str(nanmean(d)*2),'cm'));
-%             disp('*****');
-            best_radius=[best_radius,corrected_rad];
-            best_scores=[best_scores,GC_score];
-            best_scales=[best_scales,(nanmean(d)*2)];
-
-        end
+        sacSmooth=get_smooth_SAC(SpRmap); %Obtains already smoothened SAC  
+        [GC_score, GC_orientations, d, field_diameter]=get_Moser_GC_basic_props3(sacSmooth, GC_thresh);
+%         best_radius=[];
+%         best_scores=[];
+%         best_scales=[];
+%         for corrected_rad=10:60
+%             [GC_score, GC_orientations, d, field_diameter,correct_rad,calculated_rad]=get_Moser_GC_basic_props3_pauline(sacSmooth, GC_thresh,corrected_rad);
+% %             disp(d);
+% %             disp('*****');
+% %             disp(corrected_rad);
+% %             disp(GC_score);
+% %             disp(strcat('scale=',num2str(nanmean(d)*2),'cm'));
+% %             disp('*****');
+%             best_radius=[best_radius,corrected_rad];
+%             best_scores=[best_scores,GC_score];
+%             best_scales=[best_scales,(nanmean(d)*2)];
+% 
+%         end
 %         disp('best radius')
 %         disp(best_radius(find(best_scores==max(max(best_scores)))));
 %         disp('best scale')
 %         disp(best_scales(find(best_scores==max(max(best_scores)))));
 % 
-        GC_score = max(max(best_scores));
+%         GC_score = max(max(best_scores));
 
         %**************Estimating BC_measure:***********************************
         BC_score=get_BC_score2(smooth_r_map);  
@@ -141,7 +142,7 @@ function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low
                     cell_type = string('SC');
                 end
             elseif cell_type == string('SC')
-                if surface_low_FR<0.4 && ratio_max_min_FR<30
+                if surface_low_FR<0.4 || ratio_max_min_FR<30
                     cell_type = string('unclassified');
                 end
             end
