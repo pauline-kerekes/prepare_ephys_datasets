@@ -1,5 +1,5 @@
 
-animal_folder_ = 'E:\mHYK24\170626\';
+animal_folder_ = 'W:\mEC_tau_ephys\MH503\020924\';
 
 TTL_type = 2; % VERY IMPORTANT
 pixels_per_meter = 539;

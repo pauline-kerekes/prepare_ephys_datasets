@@ -61,8 +61,8 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
                 subplot(5,5,iplot);
                 Draw_RMap([rate_maps{1,list_clusters==cell_i}]);
                 axis off;
-                title(strcat(num2str(cell_i),{' '},cell_types(list_clusters==cell_i)));
-                %title(strcat(num2str(round(surfaces_low_FR(list_clusters==cell_i),2)),{' '},num2str(round(ratios_max_min_FR(list_clusters==cell_i),2))));
+                %title(strcat(num2str(cell_i),{' '},cell_types(list_clusters==cell_i)));
+                title(strcat(num2str(round(surfaces_low_FR(list_clusters==cell_i),2)),{' '},num2str(round(ratios_max_min_FR(list_clusters==cell_i),2))));
                 %title(strcat(num2str(GC_scores(list_clusters==cell_i))));
                 iplot=iplot+1;
 

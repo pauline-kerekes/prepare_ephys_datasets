@@ -119,7 +119,7 @@ function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low
         
         % get other criteria for classifying a cell firing as spatial
         srm = ones(size(smooth_r_map));
-        surface_low_FR = sum(smooth_r_map<0.15*(max(max(smooth_r_map))-min(min(smooth_r_map))),'all')/sum(srm,'all');
+        surface_low_FR = sum(smooth_r_map<0.2*(max(max(smooth_r_map))-min(min(smooth_r_map))),'all')/sum(srm,'all');
         ratio_max_min_FR = (max(max(smooth_r_map))/min(min(smooth_r_map)));
 
         
