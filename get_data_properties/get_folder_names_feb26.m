@@ -30,7 +30,7 @@ function [folder_names,pos_files,recording_letters,RE_recording_number] = get_fo
     
     % first check
     if length(folder_names) ~= length(pos_files)
-        disp('check the raw data folder');
+        disp('check the raw data folder: maybe could use the function get_folder_names_feb26_older_batches');
         keyboard;
     end
     

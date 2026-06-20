@@ -6,13 +6,13 @@
 path_to_raw_data = 'W:\mEC_tau_ephys\';
 
 
-for mouse=[string('mHYK20')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
+for mouse=[string('MH503')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
 
 
-    path_to_cutting_log = strcat('D:\Projects\AD\Batch_mEC_ephys\read_data\cutting_log_AD_mec_batch21_HH_update');%strcat('D:\Projects\AD\Batch_mEC_ephys\read_data\'); D:\Projects\Manipulating Visual Cues\Morphing\Cells_Morphing
+    path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
     mapping_spreadsheet = 'D:\Projects\AD\Batch_mEC_ephys\read_data\mapping_npix_tau_gr_batch21_HH';
-    folder_to_store_the_mats = string('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches_test\');
-    folder_to_store_the_LFP = string('D:\Projects\AD\Batch_mEC_ephys\LFP_test\');
+    folder_to_store_the_mats = string('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches_test_MH503\');
+    folder_to_store_the_LFP = string('D:\Projects\AD\Batch_mEC_ephys\LFP_test_503\');
 
     %% VERY IMPORTANT CHECK BELOW
     cut='n';
@@ -25,10 +25,11 @@ for mouse=[string('mHYK20')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE
     
     if ~exist(folder_to_store_the_mats2)
         mkdir(folder_to_store_the_mats2);
+        mkdir(folder_to_store_the_LFP);
     end
     
     
-    [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_probe_cut_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
+    [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_probe_cut_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log,list_exps_location_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
     % [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_probe_cut_log,list_shankmix_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log, excel_log, mouse); 
     which_kilosort = [list_kilo_cut_log{1}];
 
@@ -49,10 +50,12 @@ for mouse=[string('mHYK20')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE
             shankmix = list_shankmix_log(i_session);
             VE_recording_number = list_VE_indices_log(i_session);
             n_pixels_per_meter = list_npixels_log(i_session);
+            exp_location = list_exps_location_log(i_session);
 
             disp(animalID);
             disp(session);
             disp(n_pixels_per_meter);
+            disp(exp_location);
 
     %         [mouse_index,mouse_batch,mouse_implant,reward_type] = get_animal_specs(animalID);        
     %         [folder_names,pos_files,number_recordings,title_trials,LED_direction,line_file,VE_recording_number,RE_recording_number,track_length] = get_folder_names_2_neuropixels(animalID,session);
@@ -83,7 +86,7 @@ for mouse=[string('mHYK20')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE
                 %% CHECK HERE
 %                 disp('check the VE track distance inside the following function!!');
 %                 keyboard;
-                store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter);
+                store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location);
                 % was used before 010326:
                 %store_variables_neuropixels_from_081124_fct(recording_letters,session,animalID,part,cut,folder_to_store_the_mats,project,version_npix,folder_to_store_LFP,folder_to_store_the_mats2,shankmix);
                 %store_variables_neuropixels_from_081124_cutpos_fct(recording_letters,session,animalID,part,cut,folder_to_store_the_mats,project,version_npix,folder_to_store_LFP,folder_to_store_the_mats2);

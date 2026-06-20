@@ -1,5 +1,5 @@
 
-function store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter)
+function store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location)
 
     % updates on that program (120924): 
     % - I add an option to choose if we read cluster
@@ -50,9 +50,19 @@ function store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,an
     [animal_index, mouse_batch, mouse_implant, reward_pos] = get_animal_specs(animalID); 
     
     animal_folder_ = strcat(path_to_raw_data,animalID,'\',session,'\');
-    [folder_names,pos_files,list_letter_recording,RE_recording_number] = get_folder_names_feb26(animal_folder_, VE_recording_number);
-    %[folder_names,pos_files,list_letter_recording,RE_recording_number] =get_folder_names_feb26_older_batches(animal_folder_, VE_recording_number);
-    concatenated_folder = strcat(animal_folder_,'concatenated_file\'); 
+    if exp_location == string('Cambridge')
+        [folder_names,pos_files,list_letter_recording,RE_recording_number] =get_folder_names_feb26_older_batches(animal_folder_, VE_recording_number);
+    elseif exp_location == string('London')
+        [folder_names,pos_files,list_letter_recording,RE_recording_number] = get_folder_names_feb26(animal_folder_, VE_recording_number);
+    else
+        disp('experiments location: cambridge or london?');
+        keyboard;
+    end
+    %[folder_names,pos_files,list_letter_recording,RE_recording_number] = get_folder_names_feb26(animal_folder_, VE_recording_number);
+%     [folder_names,pos_files,list_letter_recording,RE_recording_number] =get_folder_names_feb26_older_batches(animal_folder_, VE_recording_number);
+
+    concatenated_folder = get_concatenated_folder(animal_folder_);
+    %concatenated_folder = strcat(animal_folder_,'concatenated_file\'); 
 
     %%
     

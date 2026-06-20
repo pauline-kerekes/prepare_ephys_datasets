@@ -27,7 +27,7 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
         clusters = [];
         surfaces_low_FR = [];
         ratios_max_min_FR = [];
-        GC_scales = [];
+%         GC_scales = [];
         
         for cell_i = 1:length(list_clusters)
             spikes_stamps = [list_clusters_spikes{1,cell_i}];
@@ -61,12 +61,13 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
                 subplot(5,5,iplot);
                 Draw_RMap([rate_maps{1,list_clusters==cell_i}]);
                 axis off;
-                %title(strcat(num2str(cell_i),{' '},cell_types(list_clusters==cell_i)));
-                title(strcat(num2str(round(surfaces_low_FR(list_clusters==cell_i),2)),{' '},num2str(round(ratios_max_min_FR(list_clusters==cell_i),2))));
+                title(strcat(num2str(cell_i)));
+%                 title(strcat(num2str(round(surfaces_low_FR(list_clusters==cell_i),2)),{' '},num2str(round(ratios_max_min_FR(list_clusters==cell_i),2))));
                 %title(strcat(num2str(GC_scores(list_clusters==cell_i))));
                 iplot=iplot+1;
 
                 if iplot > 25
+                    sgtitle(celltype_target);
                     h=gcf;
                     set(h,'PaperOrientation','landscape');
                     set(h,'PaperUnits','normalized');
@@ -86,6 +87,7 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
             set(h,'PaperOrientation','landscape');
             set(h,'PaperUnits','normalized');
             set(h,'PaperPosition', [0 0 0.9 0.9]);
+            sgtitle(celltype_target);
             print(strcat(concatenated_folder,'\cell_type_classification\rate_maps_before_check\',celltype_target,'_',num2str(ipdf)),'-dpdf');
             close all;
         end
