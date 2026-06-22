@@ -53,7 +53,7 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
         
         disp('classification finished');
         %% plot the results of the automatical cell type classification
-        for celltype_target = [string('GC'),string('BC'),string('SC'),string('unclassified')]
+        for celltype_target = [string('GC'),string('BC'),string('SC'),string('UN_low_SI'),string('UN_high_SI'),string('HD_low_SI'),string('HD_high_SI')]
             figure;
             iplot=1;
             ipdf=1;
