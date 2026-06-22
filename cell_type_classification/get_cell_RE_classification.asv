@@ -142,24 +142,14 @@ function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low
                 if surface_low_FR >= 0.4 && ratio_max_min_FR >= 30
                     cell_type = string('SC');
                 end
-                
             elseif cell_type == string('SC')
-                if surface_low_FR<0.4 || ratio_max_min_FR<30                    
+                if surface_low_FR<0.4 || ratio_max_min_FR<30
                     cell_type = string('unclassified');
                 end
             end
             
-            
-            if cell_type == string('unclassified')
-                if SI_score >= 1.3
-                    cell_type = string('UN_high_SI');
-                else
-                    cell_type = string('UN_low_SI');
-                end
-            end
-            
         else
-            cell_type = string('UN_few_spikes');
+            cell_type = string('unclassified');
         end
     
     
