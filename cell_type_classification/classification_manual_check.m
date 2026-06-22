@@ -123,7 +123,7 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
             false_negatives = [false_negatives,value_field2];
             close all;
 
-            % get the scores to de-categorize the false positives
+            
             for false_negative = false_negatives
                 new_cell_types(find(clusters==false_negative)) = cell_type_to_check;
             end

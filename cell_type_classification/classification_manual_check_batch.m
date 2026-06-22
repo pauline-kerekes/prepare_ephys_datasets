@@ -11,6 +11,7 @@ for mouse = [string('MH503')]
     [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
 
     for pathdata = list_sessions_cut_log
+        disp(pathdata);
         animal_folder_=strcat(path_to_raw_data,mouse,'\',pathdata,'\');
         concatenated_folder = get_concatenated_folder(animal_folder_);
         classification_manual_check(concatenated_folder,figwidth,figheight,offset_top);    
