@@ -6,13 +6,13 @@
 path_to_raw_data = 'W:\mEC_tau_ephys\';
 
 
-for mouse=[string('MH503')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
+for mouse=[string('MH502')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
 
 
     path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
     mapping_spreadsheet = 'D:\Projects\AD\Batch_mEC_ephys\read_data\mapping_npix_tau_gr_batch21_HH';
-    folder_to_store_the_mats = string('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches_test_MH503\');
-    folder_to_store_the_LFP = string('D:\Projects\AD\Batch_mEC_ephys\LFP_test_503\');
+    folder_to_store_the_mats = string('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches\');
+    folder_to_store_the_LFP = string('D:\Projects\AD\Batch_mEC_ephys\LFP_test\');
 
     %% VERY IMPORTANT CHECK BELOW
     cut='n';
