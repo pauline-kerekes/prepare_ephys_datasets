@@ -71,7 +71,6 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
                 else % for GC or BC
                     if (ratios_max_min_FR(clusters==false_positive)>=30 && surfaces_low_FR(clusters==false_positive)>=0.4) %(ratios_max_min_FR(clusters==false_positive)>=20 && surfaces_low_FR(clusters==false_positive)>=0.4)
                         new_assignment = string('SC');
-                        disp(false_positive);
                     else
                         if HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) < 1.3
                             new_assignment = string('HD_low_SI');
