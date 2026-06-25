@@ -29,10 +29,9 @@ for mouse=[string('MH502')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE 
     end
     
     
-    [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_probe_cut_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log,list_exps_location_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
+    [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_probe_cut_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log,list_exps_location_log,list_useful_comments_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
     % [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_probe_cut_log,list_shankmix_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log, excel_log, mouse); 
     which_kilosort = [list_kilo_cut_log{1}];
-
 
     done = [];
     sheet_number = 1;
@@ -51,7 +50,8 @@ for mouse=[string('MH502')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE 
             VE_recording_number = list_VE_indices_log(i_session);
             n_pixels_per_meter = list_npixels_log(i_session);
             exp_location = list_exps_location_log(i_session);
-
+            useful_comments = list_useful_comments_log(i_session);
+            
             disp(animalID);
             disp(session);
             disp(n_pixels_per_meter);
@@ -69,14 +69,14 @@ for mouse=[string('MH502')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE 
 
              if ~exist(strcat(concatenated_folder,'\manual_secondpart\'))
                 parts=[1];
-                disp('no second file for cutting');
+%                 disp('no second file for cutting');
              else
                 parts=[1,2];
              end
 
 
             for part = parts
-                %% old
+                %% OLD
                 %store_variables_neuropixels_from_260424_fct(recording_letters,session,animalID,part,cut,folder_to_store_the_mats,project,version_npix);
                 %store_variables_neuropixels_from_170924_fct(recording_letters,session,animalID,part,cut,folder_to_store_the_mats,project,version_npix);
                 %add_LFP_with_delay_neuropixels_091024_fct(recording_letters,session,animalID,part,cut,folder_to_store_the_mats,project,version_npix);
@@ -86,7 +86,17 @@ for mouse=[string('MH502')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE 
                 %% CHECK HERE
 %                 disp('check the VE track distance inside the following function!!');
 %                 keyboard;
-                store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location);
+                if ismissing(useful_comments) == 1
+                    store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location);
+                else
+                    if contains(string(useful_comments),string('ephys short'))==1
+                        disp(string(useful_comments));
+                        store_variables_neuropixels_from_010326_cut_pos_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location);
+                    else
+                        store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location);
+                    end
+                end
+                %% OLD
                 % was used before 010326:
                 %store_variables_neuropixels_from_081124_fct(recording_letters,session,animalID,part,cut,folder_to_store_the_mats,project,version_npix,folder_to_store_LFP,folder_to_store_the_mats2,shankmix);
                 %store_variables_neuropixels_from_081124_cutpos_fct(recording_letters,session,animalID,part,cut,folder_to_store_the_mats,project,version_npix,folder_to_store_LFP,folder_to_store_the_mats2);

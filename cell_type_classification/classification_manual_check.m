@@ -2,7 +2,7 @@
 function classification_manual_check(folder_session,figwidth,figheight,offset_top)
 
 
-    if exist(strcat(folder_session,'\cell_type_classification\classification_scores.mat')) && ~exist(strcat(folder_session,'\cell_type_classification\cell_list_classification.xlsx'))
+    if exist(strcat(folder_session,'\cell_type_classification\classification_scores.mat')) && ~exist(strcat(folder_session,'\cell_type_classification\cell_list_classification_checked.xlsx'))
         % get the clusters indices and the corresponding cell types
         tic;
         load(strcat(folder_session,'\cell_type_classification\classification_scores.mat'));
@@ -255,8 +255,19 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
         set(h,'PaperOrientation','landscape');
         set(h,'PaperUnits','normalized');
         set(h,'PaperPosition', [0 0 0.9 0.9]);
+        
+        prompt = strcat("continue? [yes=1;no=0]");
+        value_field2 = input(prompt);
+        
         print(strcat(folder_session,'\cell_type_classification\scores_per_cell_type'),'-dpdf');
         close all;
+        
+        if value_field2==0
+            quit;
+        end
+        
+        
+        
         
     end
     

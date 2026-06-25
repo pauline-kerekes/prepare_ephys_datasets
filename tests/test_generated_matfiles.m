@@ -1,7 +1,7 @@
 
 
 
-load('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches_test_MH503\M92_02092024a_204.mat');    
+load('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches\M91_03082024b_489.mat');    
 
 spk_50 = ceil((spikes_stamps/spike_sampling_rate)*pos_sampling_rate);
 
@@ -14,7 +14,7 @@ hold on;
 xlim([0,track_length]);
 
 %%
-load('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches_test_MH503\M92_02092024b_204.mat');    
+load('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches\M91_03082024c_489.mat');    
 
 spk_50 = ceil((spikes_stamps/spike_sampling_rate)*pos_sampling_rate);
 
@@ -30,6 +30,7 @@ sp_map=Spike_Map(pos, spk_50, bin_size_RE);
 
 Draw_RMap(smooth_rate_map_RE);
 axis equal;
+set(gca,'YDir','normal');
 %%
 set(gca, 'XTick', []);
 set(gca, 'YTick', []);

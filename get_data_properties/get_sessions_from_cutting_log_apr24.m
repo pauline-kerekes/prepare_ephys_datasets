@@ -1,6 +1,6 @@
 
 
-function [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log,list_exps_location_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log, mouse)
+function [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log,list_exps_location_log,list_useful_comments_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log, mouse)
   
     if mouse ~= string('none')
         [~, ~, file_exp] = xlsread(strcat(path_to_cutting_log),mouse);
@@ -19,6 +19,7 @@ function [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo
     list_VE_indices_log = [];
     list_npixels_log = [];
     list_exps_location_log = [];
+    list_useful_comments_log = [];
     
     first_line=string(file_exp(1,:));
     column_ok = find(first_line==string('generate mats'));
@@ -32,6 +33,7 @@ function [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo
     colVEindex = find(first_line==string('VE rec index'));
     colnpixels = find(first_line==string('N pixels per meter'));
     colexploc = find(first_line==string('Experiments location'));
+    colcomments = find(first_line==string('comments'));
     
     for i_line = 2:size(file_exp,1) % i do a loop instead of just indexing to check the session names - some miss a '0' 
         %at the beginning when they are read from excel and I want to correct for that.
@@ -62,6 +64,9 @@ function [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo
                     list_npixels_log = [list_npixels_log, cell2mat(file_exp(i_line,colnpixels))];
                     
                     list_exps_location_log = [list_exps_location_log,string(cell2mat(file_exp(i_line,colexploc)))];
+                    
+                    list_useful_comments_log = [list_useful_comments_log,string(cell2mat(file_exp(i_line,colcomments)))];
+
               
             end           
             

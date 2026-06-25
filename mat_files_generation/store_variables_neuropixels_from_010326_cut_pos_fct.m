@@ -1,5 +1,5 @@
 
-function store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location)
+function store_variables_neuropixels_from_010326_cut_pos_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location)
 
     % updates on that program (120924): 
     % - I add an option to choose if we read cluster
@@ -137,13 +137,21 @@ function store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,an
             end
             
             sptime              =   t{n_trial}.spike_times; 
-            pos                 =   t{n_trial}.xy1;
+            pos_tmp                 =   t{n_trial}.xy1;
             dir_head              =   t{n_trial}.angles;
             pos_z  = t{n_trial}.zpos;
             pos_y  = t{n_trial}.ypos;
 
             licking_sig=t{n_trial}.licks;
             reward_stamps=t{n_trial}.rewards;
+
+            %% here I cut the pos to the same size as the spikes file! the only modification made from program store_variables_neuropixels_from_081124_fct
+            if max(size(pos_tmp)) > floor((sptime(end)/spike_sampling_rate)*pos_sampling_rate)
+                pos = pos_tmp(1:floor((sptime(end)/spike_sampling_rate)*pos_sampling_rate),:);
+            else
+                pos = pos_tmp;
+            end
+            %%
 
  
             % Get trial length
