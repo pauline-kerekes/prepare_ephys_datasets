@@ -1,4 +1,4 @@
-# This repository is to pre-process the electrophysiological data in the Krupic lab.  
+# A repository for pre-processing electrophysiological data.  
 ## The pre-processing has four stages:    
 + sorting the cells using Kilosort and plot of the sorted cells spikes as a function of position.  
 + selection of the good units (remove the noise units) using Bombcell.  
