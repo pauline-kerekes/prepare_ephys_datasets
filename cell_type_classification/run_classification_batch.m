@@ -6,7 +6,7 @@ spike_sampling_rate = 30000;
 pos_sampling_rate = 50;
 %
 
-for mouse = [string('MH502')]
+for mouse = [string('MH508')]
     path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
     [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
 

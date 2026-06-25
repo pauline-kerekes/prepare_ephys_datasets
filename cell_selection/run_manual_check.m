@@ -2,7 +2,7 @@
 
 %% parameters
 path_to_raw_data = 'W:\mEC_tau_ephys\';
-mouse=string('mHYK16'); % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
+mouse=string('mHYK20'); % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
 path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
 [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_probe_cut_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
 

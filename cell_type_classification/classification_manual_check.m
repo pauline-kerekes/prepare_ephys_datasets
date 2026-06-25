@@ -56,7 +56,7 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
 
             for false_positive = false_positives
 
-                if cell_type_to_check == string('SC')
+                if cell_type_to_check == string('SC') % if the cell is actually not a SC
                     if HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) < 1.3
                         new_assignment = string('HD_low_SI');
                     elseif HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) >= 1.3
@@ -92,11 +92,11 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
             get_size_fig(figwidth,figheight,offset_top);
 
             if cell_type_to_check == string('SC')
-                list_of_cell_types_tonot_check = [string('SC'),string('BC'),string('GC')];
+                list_of_cell_types_tonot_check = [string('SC'),string('BC'),string('GC'),string('UN_few_spikes')];
             elseif cell_type_to_check == string('BC')
-                list_of_cell_types_tonot_check = [string('BC'),string('GC')];
+                list_of_cell_types_tonot_check = [string('BC'),string('GC'),string('UN_few_spikes')];
             elseif cell_type_to_check == string('GC')
-                list_of_cell_types_tonot_check = [string('GC')];
+                list_of_cell_types_tonot_check = [string('GC'),string('UN_few_spikes')];
             end
 
             iplott=1;
@@ -154,11 +154,11 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
         SI_scores = scores{:,["SI_scores"]};
         HD_scores = scores{:,["HD_scores"]};
     %     clusters_HD = clusters(new_cell_types==string('HD'));
-        SI_scores_HDcells = SI_scores(new_cell_types==string('HD_low_SI'));
+        SI_scores_HDcells = SI_scores(new_cell_types==string('low_SI'));
         HD_scores_HDcells = HD_scores(contains(new_cell_types,string('HD')));
 
         if isempty(find(SI_scores_HDcells>=1.3)) == 0
-            disp("some HD cells have a high SI score! (they shouldnt)");
+            disp("some HD or unclassified low SI cells have a high SI score! (they shouldnt)");
             keyboard;
         end
 

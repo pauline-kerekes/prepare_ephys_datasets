@@ -158,6 +158,15 @@ function [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low
                 end
             end
             
+            
+            if cell_type == string('HD')
+                if SI_score >= 1.3
+                    cell_type = string('HD_high_SI');
+                else
+                    cell_type = string('HD_low_SI');
+                end
+            end
+            
         else
             cell_type = string('UN_few_spikes');
         end
