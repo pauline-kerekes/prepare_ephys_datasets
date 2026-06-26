@@ -1,6 +1,6 @@
 
 path_to_raw_data = 'W:\mEC_tau_ephys\';
-mouse = string('MH498');
+mouse = string('MH506');
 % PARAMETERS TO CHECK
 figwidth = 600;
 figheight=800;

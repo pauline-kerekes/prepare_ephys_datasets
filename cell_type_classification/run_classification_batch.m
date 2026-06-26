@@ -5,6 +5,7 @@ target_brain_region = string('mEC');
 spike_sampling_rate = 30000;
 pos_sampling_rate = 50;
 %
+% change test
 
 for mouse = [string('MH509'),string('MH502'),string('MH506')]
     path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
