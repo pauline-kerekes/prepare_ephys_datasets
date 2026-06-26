@@ -56,22 +56,8 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
 
             for false_positive = false_positives
 
-                if cell_type_to_check == string('SC') % if the cell is actually not a SC
-                    if HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) < 1.3
-                        new_assignment = string('HD_low_SI');
-                    elseif HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) >= 1.3
-                        new_assignment = string('HD_high_SI');
-                    elseif HD_scores(clusters==false_positive) < 0.19 && SI_scores(clusters==false_positive) < 1.3
-                        new_assignment = string('UN_low_SI');
-                    elseif HD_scores(clusters==false_positive) < 0.19 && SI_scores(clusters==false_positive) >= 1.3
-                        new_assignment = string('UN_high_SI');
-                    end
-
-
-                else % for GC or BC
-                    if (ratios_max_min_FR(clusters==false_positive)>=30 && surfaces_low_FR(clusters==false_positive)>=0.4) %(ratios_max_min_FR(clusters==false_positive)>=20 && surfaces_low_FR(clusters==false_positive)>=0.4)
-                        new_assignment = string('SC');
-                    else
+                if isempty(find(clusters==false_positive)) == 0
+                    if cell_type_to_check == string('SC') % if the cell is actually not a SC
                         if HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) < 1.3
                             new_assignment = string('HD_low_SI');
                         elseif HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) >= 1.3
@@ -81,9 +67,25 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
                         elseif HD_scores(clusters==false_positive) < 0.19 && SI_scores(clusters==false_positive) >= 1.3
                             new_assignment = string('UN_high_SI');
                         end
+
+
+                    else % for GC or BC
+                        if (ratios_max_min_FR(clusters==false_positive)>=30 && surfaces_low_FR(clusters==false_positive)>=0.4) %(ratios_max_min_FR(clusters==false_positive)>=20 && surfaces_low_FR(clusters==false_positive)>=0.4)
+                            new_assignment = string('SC');
+                        else
+                            if HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) < 1.3
+                                new_assignment = string('HD_low_SI');
+                            elseif HD_scores(clusters==false_positive) >= 0.19 && SI_scores(clusters==false_positive) >= 1.3
+                                new_assignment = string('HD_high_SI');
+                            elseif HD_scores(clusters==false_positive) < 0.19 && SI_scores(clusters==false_positive) < 1.3
+                                new_assignment = string('UN_low_SI');
+                            elseif HD_scores(clusters==false_positive) < 0.19 && SI_scores(clusters==false_positive) >= 1.3
+                                new_assignment = string('UN_high_SI');
+                            end
+                        end
                     end
+                    new_cell_types(find(clusters==false_positive)) = new_assignment;
                 end
-                new_cell_types(find(clusters==false_positive)) = new_assignment;
             end
 
 

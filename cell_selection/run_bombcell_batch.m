@@ -2,6 +2,7 @@
 %%
 
 path_to_raw_data = 'W:\mEC_tau_ephys\';
+path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
 
 % PARAMETERS TO CHECK BEFORE RUNNING
 use_waveforms = 'n';
@@ -12,9 +13,8 @@ step = 10; % how close are the waveforms displayed (will be used for the manual 
 
 % pause(4000);
 
-for mouse = [string('mHYK20')]
+for mouse = [string('MH499')]
     % mouse=string('mHYK18'); % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
-    path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
     [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
 
 
@@ -30,7 +30,7 @@ for mouse = [string('mHYK20')]
     for pathdata = list_sessions_cut_log % [string('010426'),string('020426'),string('030426')]
         
         disp(pathdata);
-        ephysKilosortPath = get_concatenated_folder(strcat('W:\mEC_tau_ephys\',mouse,'\',pathdata,'\'));
+        ephysKilosortPath = get_concatenated_folder(strcat(path_to_raw_data,mouse,'\',pathdata,'\'));
 
 %         ephysKilosortPath = char(strcat('W:\mEC_tau_ephys\',mouse,'\',pathdata,'\concatenated_file')); % like: 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'
         run_bombcell(char(ephysKilosortPath), use_waveforms, neuropixelsVersion, kilosortVersion, min_spikes, step);
