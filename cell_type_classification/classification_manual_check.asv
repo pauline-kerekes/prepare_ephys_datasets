@@ -23,14 +23,14 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
             iplott=1;
             for cell_i = clusters(new_cell_types==cell_type_to_check)'
                 
-                if max(size([rate_maps{1,find(clusters==cell_i)}])) < 70
+                if max(size(rate_maps{1,find(clusters==cell_i)})) < 70
                     subplot(5,5,iplott);
                     Draw_RMap(rate_maps{1,find(clusters==cell_i)});
                     axis off;
                     title(num2str(cell_i));
                     iplott=iplott+1;
                 else
-                    new_cell_types(find(clusters==cell_i)) = string('weird');
+                    new_cell_types(new_cell_types==cell_i) = string('weird');
                 end
 
                 if iplott > 25
@@ -107,15 +107,15 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
 
             iplott=1;
             for cell_i = clusters(~ismember(new_cell_types,list_of_cell_types_tonot_check))'
-                if max(size([rate_maps{1,find(clusters==cell_i)}])) < 70
+                if max(size(rate_maps{1,find(clusters==cell_i)})) < 70
                     subplot(5,5,iplott);
+                    disp(cell_i);
                     Draw_RMap(rate_maps{1,find(clusters==cell_i)});
                     axis off;
                     title(num2str(cell_i));
 
                     iplott=iplott+1;
                 else
-                    new_cell_types(find(clusters==cell_i)) = string('weird');
                 end
 
                 if iplott > 25
