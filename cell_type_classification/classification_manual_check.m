@@ -206,8 +206,8 @@ function classification_manual_check(folder_session,figwidth,figheight,offset_to
         end
         
         %% plot the score values per cell type for sanity check
-        [~, ~, cell_list] = xlsread(strcat(folder_session,'cell_type_classification\cell_list_classification_checked.xlsx'));
-        load(strcat(folder_session,'cell_type_classification\classification_scores.mat'));
+        [~, ~, cell_list] = xlsread(strcat(folder_session,'\cell_type_classification\cell_list_classification_checked.xlsx'));
+        load(strcat(folder_session,'\cell_type_classification\classification_scores.mat'));
 
         clusters = cell2mat(cell_list(2:end,1));
         cell_types = string(cell_list(2:end,3));

@@ -11,7 +11,7 @@ sessions_all = 0;
 sessions_not_done = 0;
 for pathdata = list_sessions_cut_log %[string('260326'),string('270326'),string('280326'),string('290326'),string('300326'),string('310326')]
     %ephysKilosortPath = char(strcat('W:\mEC_tau_ephys\',mouse,'\',pathdata,'\concatenated_file')); %ephysKilosortPath = 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'; % like: 'W:\mEC_tau_ephys\mHYK20\110526\concatenated_file'
-    ephysKilosortPath = get_concatenated_folder(strcat('W:\mEC_tau_ephys\',mouse,'\',pathdata,'\'));
+    ephysKilosortPath = get_concatenated_folder(strcat(path_to_raw_data,mouse,'\',pathdata,'\'));
 
     if ~exist(strcat(ephysKilosortPath,'\manual_firstpart\cell_list_kilo2.xlsx'),'file')
         sessions_not_done = sessions_not_done+1;

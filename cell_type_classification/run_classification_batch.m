@@ -1,3 +1,5 @@
+
+
 path_to_raw_data = 'W:\mEC_tau_ephys\';
 % PARAMETERS TO CHECK
 m_per_bin = 0.02;
@@ -7,7 +9,7 @@ pos_sampling_rate = 50;
 %
 % change test
 
-for mouse = [string('MH509'),string('MH502'),string('MH506')]
+for mouse = [string('mHYK12'),string('mHYK16'),string('mHYK18'),string('mHYK20')]
     path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
     [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
 
