@@ -1,7 +1,7 @@
 
 path_to_raw_data = 'W:\mEC_tau_ephys\';
 path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
-mouse = string('mHYK12');
+mouse = string('MH508');
 
 
 % PARAMETERS TO CHECK

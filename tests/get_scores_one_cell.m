@@ -6,5 +6,7 @@ clusters = scores{:,["clusters"]};
 
 disp('the cell type displayed below corresponds to the one before manual check');
 cluster_to_check = 1136;
-scores(find(clusters==cluster_to_check),:)
+disp(scores(find(clusters==cluster_to_check),:));
+siscore=scores{:,["SI_scores"]};
+siscore=scores{:,["HD_scores"]};
 
