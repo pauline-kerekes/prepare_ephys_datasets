@@ -11,9 +11,9 @@ pos_sampling_rate = 50;
 %
 % change test
 
-for mouse = [string('mHYK12'),string('mHYK16'),string('mHYK18'),string('mHYK20')]
+for mouse = [string('mHYK12')]
     [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
-
+    disp(mouse);
     for pathdata = list_sessions_cut_log
         disp(pathdata);
         TTL_type = list_TTL_log(1,find(list_sessions_cut_log==pathdata));
