@@ -6,7 +6,7 @@
 path_to_raw_data = 'W:\mEC_tau_ephys\';
 
 
-for mouse=[string('MH502')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
+for mouse=[string('mHYK12'),string('mHYK16'),string('mHYK18'),string('mHYK20')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
 
 
     path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
