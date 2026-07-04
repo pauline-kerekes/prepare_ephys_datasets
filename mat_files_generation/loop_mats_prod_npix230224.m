@@ -39,7 +39,7 @@ for mouse=[string('mHYK20')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE
 
     i_an=0;
 
-    for i_session = 1:length(list_animals_cut_log)
+    for i_session = 29:length(list_animals_cut_log)
 
             tic;
             animalID = list_animals_cut_log(i_session);
