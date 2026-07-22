@@ -1,8 +1,13 @@
 
 
 
-path_to_raw_data = 'W:\mEC_tau_ephys\';
-path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
+% path_to_raw_data = 'W:\mEC_tau_ephys\';
+% path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
+
+path_to_raw_data = 'W:\mEC_tau_ephys\'; %'W:\WT_PI_ephys\';
+path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues'); %strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
+
+
 
 % PARAMETERS TO CHECK
 m_per_bin = 0.02;
@@ -12,7 +17,7 @@ pos_sampling_rate = 50;
 %
 % change test
 
-for mouse = [string('mHYK12'),string('mHYK16'),string('mHYK18'),string('mHYK20')] %[string('MH498'),string('MH502'),string('MH503'),string('MH506'),string('MH508'),string('MH509')]
+for mouse = [string('mHYK17')] %[string('MH498'),string('MH502'),string('MH503'),string('MH506'),string('MH508'),string('MH509')]
     [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
     disp(mouse);
     for pathdata = list_sessions_cut_log

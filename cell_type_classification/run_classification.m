@@ -30,6 +30,7 @@ function run_classification(animal_folder_,TTL_type,pixels_per_meter,m_per_bin,t
 %         GC_scales = [];
         
         for cell_i = 1:length(list_clusters)
+            disp(list_clusters(cell_i));
             spikes_stamps = [list_clusters_spikes{1,cell_i}];
             [BC_score,GC_score,SI_score,HD_score,cell_type,smooth_r_map,surface_low_FR,ratio_max_min_FR,GC_scale] = get_cell_RE_classification(pos,dir_head,spikes_stamps,spike_sampling_rate,pos_sampling_rate,target_brain_region,pixels_per_meter,m_per_bin);
             BC_scores = [BC_scores;BC_score];

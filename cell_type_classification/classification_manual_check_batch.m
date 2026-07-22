@@ -1,7 +1,9 @@
 
-path_to_raw_data = 'W:\mEC_tau_ephys\';
-path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
-mouse = string('MH508');
+path_to_raw_data = 'W:\WT_PI_ephys\'; %'W:\mEC_tau_ephys\';
+%path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
+path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues'); %strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
+
+mouse = string('mHYK23');
 
 
 % PARAMETERS TO CHECK

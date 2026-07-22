@@ -6,12 +6,13 @@
 path_to_raw_data = 'W:\mEC_tau_ephys\';
 
 
-for mouse=[string('mHYK20')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
+for mouse=[string('mHYK17')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
 
 
-    path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
-    mapping_spreadsheet = 'D:\Projects\AD\Batch_mEC_ephys\read_data\mapping_npix_tau_gr_batch21_HH';
-    folder_to_store_the_mats = string('D:\Projects\AD\Batch_mEC_ephys\mats\mEC_tau_new_batches\');
+    % path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
+    path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues');
+    mapping_spreadsheet = 'D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\mapping_npix_n_cues';
+    folder_to_store_the_mats = string('D:\Cells\Error_correction\new_mats\');
     folder_to_store_the_LFP = string('D:\Projects\AD\Batch_mEC_ephys\LFP_test\');
 
     %% VERY IMPORTANT CHECK BELOW
@@ -39,7 +40,7 @@ for mouse=[string('mHYK20')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE
 
     i_an=0;
 
-    for i_session = 29:length(list_animals_cut_log)
+    for i_session = 1:length(list_animals_cut_log)
 
             tic;
             animalID = list_animals_cut_log(i_session);

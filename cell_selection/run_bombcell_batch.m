@@ -1,8 +1,8 @@
 
+%% variables to adapt to your data:
+path_to_raw_data = 'W:\WT_PI_ephys\'; %'W:\mEC_tau_ephys\'; %'H:\Tau_MEC_Npx_2026\'; %'W:\mEC_tau_ephys\';
+path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues');
 %%
-
-path_to_raw_data = 'W:\mEC_tau_ephys\';
-path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
 
 % PARAMETERS TO CHECK BEFORE RUNNING
 use_waveforms = 'n';
@@ -13,7 +13,7 @@ step = 10; % how close are the waveforms displayed (will be used for the manual 
 
 % pause(4000);
 
-for mouse = [string('MH499')]
+for mouse = [string('mHYK23')]
     % mouse=string('mHYK18'); % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
     [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
 
