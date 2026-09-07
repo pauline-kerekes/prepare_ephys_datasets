@@ -3,8 +3,8 @@ path_to_raw_data = 'W:\mEC_tau_ephys\'; %'W:\mEC_tau_ephys\';W:\WT_PI_ephys\
 path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
 %path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues_pC1'); %strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
 
-mouse = string('mHYK12');
-start_from = string('PI_long day 1'); % string('first protocol') or put the protocol name you want to start with like string('Learning day 4') for instance
+mouse = string('mHYK20');
+start_from = string('Rmap day 1'); % string('first protocol') or put the protocol name you want to start with like string('Learning day 4') for instance
 
 % PARAMETERS TO CHECK
 figwidth = 600;
@@ -31,7 +31,7 @@ disp(strcat('you still have',{' '},num2str(sessions_not_done),'/',num2str(sessio
 [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_TTL_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
 
 if start_from ~= string('first protocol')
-    start_protocols=find(list_protocols_log==string('PI_long day 1')); % use that to start the manual check from a particular protocol, otherwise just put start_protocols=1;
+    start_protocols=find(list_protocols_log==start_from); % use that to start the manual check from a particular protocol, otherwise just put start_protocols=1;
 else
     start_protocols=1;
 end
