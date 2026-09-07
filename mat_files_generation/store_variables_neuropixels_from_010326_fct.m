@@ -1,5 +1,5 @@
 
-function store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location)
+function store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location,track_length_VE)
 
     % updates on that program (120924): 
     % - I add an option to choose if we read cluster
@@ -22,7 +22,7 @@ function store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,an
 
     %% GENERAL PARAMETERS PLEASE DOUBLE CHECK
     
-    track_length_VE = 400; %  CHECK
+%     track_length_VE = 400; %  CHECK
 %     pixels_per_meter_RE = 530; %  CHECK
     
     cm_per_bin_VE = 5;

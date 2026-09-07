@@ -3,14 +3,17 @@
 
 % in this version I changed the exp_ref: now read from vector lat pos
 
-path_to_raw_data = 'W:\mEC_tau_ephys\';
+path_to_raw_data = 'W:\mEC_tau_ephys\'; %'W:\mEC_tau_ephys\'; 'W:\WT_PI_ephys\'
 
+% CHECK THAT: (ALSO SHOULD BE READ FROM THE POS FILE INSTEAD OF BEING
+% HARDCODED
+track_length_VE = 900;
 
 for mouse=[string('mHYK17')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
 
 
     % path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
-    path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues');
+    path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues_pC1');
     mapping_spreadsheet = 'D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\mapping_npix_n_cues';
     folder_to_store_the_mats = string('D:\Cells\Error_correction\new_mats\');
     folder_to_store_the_LFP = string('D:\Projects\AD\Batch_mEC_ephys\LFP_test\');
@@ -88,13 +91,13 @@ for mouse=[string('mHYK17')] % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE
 %                 disp('check the VE track distance inside the following function!!');
 %                 keyboard;
                 if ismissing(useful_comments) == 1
-                    store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location);
+                    store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location,track_length_VE);
                 else
                     if contains(string(useful_comments),string('ephys short'))==1
                         disp(string(useful_comments));
-                        store_variables_neuropixels_from_010326_cut_pos_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location);
+                        store_variables_neuropixels_from_010326_cut_pos_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location,track_length_VE);
                     else
-                        store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location);
+                        store_variables_neuropixels_from_010326_fct(path_to_raw_data,session,animalID,part,VE_recording_number,cut,mapping_spreadsheet,version_npix,shankmix,folder_to_store_the_LFP,folder_to_store_the_mats,folder_to_store_the_mats2,n_pixels_per_meter,exp_location,track_length_VE);
                     end
                 end
                 %% OLD

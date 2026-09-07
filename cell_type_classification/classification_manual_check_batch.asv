@@ -4,7 +4,8 @@ path_to_cutting_log = strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_
 %path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues_pC1'); %strcat('G:\My Drive\tau_log\cutting_log_AD_mec_batch21_HH_update');
 
 mouse = string('mHYK12');
-start_from = string('PI_long day 1'); % string('first protocol') or put the protocol name you want to start with like string('Learning day 4') for instance
+start_from = string('first protocol'); % string('first protocol') or string('first protocol')
+
 
 % PARAMETERS TO CHECK
 figwidth = 600;
@@ -38,7 +39,7 @@ end
 
 for pathdata = list_sessions_cut_log(start_protocols:end)
     disp(pathdata);
-    disp(list_protocols_log(find(list_sessions_cut_log==pathdata)));
+    disp(list_protocols_log(find()));
     animal_folder_=strcat(path_to_raw_data,mouse,'\',pathdata,'\');
     concatenated_folder = get_concatenated_folder(animal_folder_);
     classification_manual_check(concatenated_folder,figwidth,figheight,offset_top);    

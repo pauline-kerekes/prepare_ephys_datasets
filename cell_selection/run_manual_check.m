@@ -1,9 +1,9 @@
 
 
 %% parameters
-path_to_raw_data = 'W:\WT_PI_ephys\'; %'W:\mEC_tau_ephys\';
-mouse=string('mHYK23'); % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
-path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues');
+path_to_raw_data = 'W:\WT_PI_ephys\'; %'W:\WT_PI_ephys\'; %'W:\mEC_tau_ephys\';
+mouse=string('mHYK24'); % CHECK IF THE FUNCTION TO GENERATE THE MATS IS THE ONE YOU WANT
+path_to_cutting_log = strcat('D:\Projects\Manipulating Visual Cues\Field Formation\excels_cells\cutting_log_n_cues_pC1');
 [list_animals_cut_log,list_sessions_cut_log,list_proj_cut_log,list_kilo_cut_log,list_probe_cut_log,list_shankmix_log,list_protocols_log,list_VE_indices_log,list_npixels_log] = get_sessions_from_cutting_log_apr24(path_to_cutting_log,mouse);
 
 % give the number of sessions that there is still to do
